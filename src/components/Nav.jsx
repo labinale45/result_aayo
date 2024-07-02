@@ -1,6 +1,5 @@
 import "./Nav.css";
 import Link from "next/link";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const nav = () => {
   return (
