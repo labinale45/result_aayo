@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { createClient } from '@supabase/supabase-js';
 import Nav from '@/components/Nav';
 import './Login.css';
+import "@/styles/globals.css";
 
 export default function Login() {
   const router = useRouter();
@@ -37,7 +38,7 @@ export default function Login() {
       <div className="container col-md-12">   
         <div className="log col-md-12">
           <img src="/assets/Logo.webp" alt="Logo" />
-          <h1>L O G I N</h1>
+          <h1 className="text-white text-3xl font-bold">L O G I N</h1>
           <form onSubmit={signIn}>
             <input
               className="txt"
@@ -55,7 +56,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
             /><br/>
-            <button className="txt" type="submit">LOGIN</button>
+            <button className="self-end" type="submit">LOGIN</button>
           </form>
         </div>
       </div>
