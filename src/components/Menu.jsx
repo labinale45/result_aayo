@@ -72,7 +72,7 @@ const Menu = () => {
                 }`}
               >
                 {!isSidebarClosed && (
-                  <span className={`ml-2 ${isDarkMode ? "text-gray-300" : "text-white"}`}>
+                  <span className={`ml-2 g${isDarkMode ? "text-gray-300" : "text-white"}`}>
                     {item.name}
                   </span>
                 )}
