@@ -38,7 +38,7 @@ export default function Login() {
       <div className="container col-md-12">   
         <div className="log col-md-12">
           <img src="/assets/Logo.webp" alt="Logo" />
-          <h1 className="text-white text-3xl font-bold">L O G I N</h1>
+          <h1 className="text-black text-3xl font-bold">L O G I N</h1>
           <form onSubmit={signIn}>
             <input
               className="txt"
