@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { createClient } from '@supabase/supabase-js';
+import supabase from '@/utils/client';
 import Nav from '@/components/Nav';
 import './Login.css';
 import "@/styles/globals.css";
@@ -9,8 +9,6 @@ export default function Login() {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  const supabase = createClient("https://vjcvrexoovrhfmvntfna.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZqY3ZyZXhvb3ZyaGZtdm50Zm5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgzMzA3MzEsImV4cCI6MjAzMzkwNjczMX0.4C8uvY05S8SeMsQKd9jb3ydDwSGgve65DMWOiHjsf1E");
 
     const signIn = async (event) => {
       event.preventDefault();

@@ -29,20 +29,13 @@ const Menu = () => {
       <nav
         className={`fixed top-0 left-0 h-full ${
           isDarkMode ? "bg-gray-900 text-white" : "bg-gray-200 text-gray-800"
-        } ${isSidebarClosed ? "w-24" : "w-64"} transition-all duration-500`}
+        } ${isSidebarClosed ? "w-20" : "w-60"} transition-all duration-500`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <header className="flex items-center justify-between p-4">
           <div className="flex items-center">
-            <img src="/assets/logo.png" alt="logo" className="w-10 h-10 rounded" />
-            {!isSidebarClosed && (
-              <div className="ml-3">
-                <span className={`text-lg font-semibold ${isDarkMode ? "text-gray-300" : "text-gray-800"}`}>
-                  Result Aayo
-                </span>
-              </div>
-            )}
+            <img src="/assets/logo.png" alt="logo" className="w-30 h-10 rounded" />
           </div>
           <button className={`text-white ${isDarkMode ? "bg-gray-700" : "bg-gray-300"}`} onClick={toggleDarkMode}>
             {isDarkMode ? "Light" : "Dark"} Mode
@@ -67,7 +60,7 @@ const Menu = () => {
             {menuItems.map((item) => (
               <li
                 key={item.name}
-                className={`flex items-center bg-gray-700 hover:bg-gray-600 rounded-lg m-2 p-2 transition-colors ${
+                className={`flex items-center bg-none hover:bg-gray-600 rounded-md m-2 p-2 transition-colors ${
                   !isSidebarClosed ? "cursor-pointer" : ""
                 }`}
               >
@@ -76,7 +69,7 @@ const Menu = () => {
                     {item.name}
                   </span>
                 )}
-                <img src={item.icon} alt={`${item.name} icon`} className="w-6 h-6 ml-2" />
+                <img src={item.icon} alt={`${item.name} icon`} className="w-7 h-7 ml-2" />
               </li>
             ))}
           </ul>
