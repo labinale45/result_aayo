@@ -7,11 +7,12 @@ import Teacher from "@/pages/admins/Teacher";
 import Footer from "@/components/Footer";
 import "tailwindcss/tailwind.css";
 import "@/styles/globals.css";
+import { Teachertable } from "@/pages/admins/Teachertable";
 
 const Main = () => {
   return (
     <div>
-    <Menu/>
+      <Teachertable />
     </div>
   );
 };
