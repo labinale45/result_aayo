@@ -8,11 +8,12 @@ import Footer from "@/components/Footer";
 import "tailwindcss/tailwind.css";
 import "@/styles/globals.css";
 import Login from "@/pages/Login";
+import Addteacher from "@/pages/admins/addTeacher";
 
 const Main = () => {
   return (
     <div>
-    <Login/>
+    <Addteacher/>
     </div>
   );
 };
