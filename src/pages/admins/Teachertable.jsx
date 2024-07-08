@@ -1,16 +1,18 @@
-export function Teachertable() {
+import React from 'react';
+import '@/styles/globals.css';
+import Link from 'next/link';
+export default function Teachertable() {
     return (
         <div className="relative w-full flex flex-col shadow-lg mb-6">
             <div className="flex items-center justify-between px-4">
-             
-                <button className="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 mt-4  rounded text-sm absolute top-[5%] left-[90%]" >
-                    Add Teacher
-                </button>
+             <Link href={'./Addteacher'} className="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 mt-4  rounded text-sm absolute top-[5%] left-[90%] z-10" >
+                 Add Teacher 
+                </Link>
             </div>
             <div className="flex flex-wrap items-center">
                 <div className="relative w-full px-4 max-w-full flex-grow flex">
-                    <table className="min-w-full leading-normal mt-4">
-                        <caption className="font-bold text-xl mb-4 mt-4 text-black-500 text-left">
+                    <table className="min-w-full leading-normal mt-4 z-0">
+                        <caption className="font-bold text-xl mb-4 mt-4 text-black-500 text-left w-12">
                             Teacher <br/><br/>
                         </caption>
                         <thead>

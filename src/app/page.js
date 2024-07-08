@@ -9,11 +9,12 @@ import "tailwindcss/tailwind.css";
 import "@/styles/globals.css";
 import { Teachertable } from "@/pages/admins/Teachertable";
 import Login from "@/pages/Login";
+import Addteacher from "@/pages/admins/Addteacher";
 
 const Main = () => {
   return (
     <div>
-      <Login/>
+      <Home/>
     </div>
   );
 };
