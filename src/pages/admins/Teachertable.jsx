@@ -3,15 +3,15 @@ export function Teachertable() {
         <div className="relative w-full flex flex-col shadow-lg mb-6">
             <div className="flex items-center justify-between px-4">
              
-                <button className="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 rounded text-sm">
+                <button className="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 mt-4  rounded text-sm absolute top-[5%] left-[90%]" >
                     Add Teacher
                 </button>
             </div>
             <div className="flex flex-wrap items-center">
                 <div className="relative w-full px-4 max-w-full flex-grow flex">
                     <table className="min-w-full leading-normal mt-4">
-                        <caption className="font-bold text-xl mb-4 text-black-500 text-left">
-                            Teacher 
+                        <caption className="font-bold text-xl mb-4 mt-4 text-black-500 text-left">
+                            Teacher <br/><br/>
                         </caption>
                         <thead>
                             <tr>
