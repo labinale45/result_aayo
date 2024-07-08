@@ -1,0 +1,26 @@
+/* Register.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .register {
+    text-align: center;
+  }
+  
+  .txt {
+    margin: 10px 0;
+    padding: 10px;
+    width: 80%;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
