@@ -4,6 +4,7 @@ import supabase from '@/utils/client';
 import Nav from '@/components/Nav';
 import './Login.css';
 import "@/styles/globals.css";
+import Menu from '@/components/Menu';
 
 export default function Login() {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function Login() {
         router.push("/login?message=Could not authenticate user");
       } else {
         // Authentication succeeded
-        alert("Welcome "+ username);
+        router.push("/admins/Teacher")
       }
     };
   

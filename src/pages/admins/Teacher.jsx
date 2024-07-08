@@ -10,7 +10,11 @@ export default function teacher(){
     const [address, setaddress] = useState('');
     const [date, setdate] = useState('');
     const [gender, setgender] = useState('');
-
+    const [otp,setOtp] = useState('');
+    const [genratedOtp,setGeneratedOtp]= useState('');
+    const [isOtpSent, setIsOtpSent]= useState(false);
+    const [isOtpVerified, setIsOtpVerified]= useState(false);
+    
     const create = async (event) =>{
         event.preventDefault();
 const { data, error } = await supabase
@@ -27,9 +31,12 @@ if (error || data==null){
   }
 };       
     return(
-        <div className="">
+        <div className="">  
             <h1 className="text-blue-600 text-3xl font-bold">Add Teacher</h1>
             <form onSubmit={create}>
+              <label>
+              <h2>User</h2>
+              </label>
                <input 
                className="" 
                type="text" 
