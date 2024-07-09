@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FaRegCircleUser } from "react-icons/fa6";
 import supabase from '@/utils/client';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Login() {
@@ -25,7 +25,7 @@ export default function Login() {
       alert("Could not authenticate user");
     } else {
       // Authentication succeeded
-      router.push("/admins/Teachertable"); // Redirect to another page
+      router.push('/Dashboard'); // Redirect to another page
       setUsername('');
       setPassword('');
       
