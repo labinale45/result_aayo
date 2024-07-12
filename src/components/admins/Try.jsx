@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import supabase from '@/utils/client';
-import Nav from '@/components/Nav';
+import Nav from '@/app/components/Nav/Nav';
 import './Register.css';
 import "@/styles/globals.css";
 

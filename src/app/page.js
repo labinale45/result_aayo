@@ -1,20 +1,20 @@
-import About from "@/app/About";
-import Home from "@/app/Home";
-import Menu from "@/components/Menu";
-import Nav from "@/components/Nav";
-import Teacher from "@/components/admins/Teacher";
-import Try from "@/components/admins/Try";
-import Footer from "@/components/Footer";
+"use client"
 import "tailwindcss/tailwind.css";
-import "@/styles/globals.css";
-import { Teachertable } from "@/components/admins/Teachertable";
-import Login from "@/app/Login";
-import Addteacher from "@/components/admins/Addteacher";
+import "@/app/styles/globals.css";
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Main = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to /homes when the component mounts
+    router.push('/homes');
+  }, [router]);
+
   return (
     <div>
-      <Login/>
+      <h1>Redirecting...</h1>
     </div>
   );
 };

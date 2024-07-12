@@ -1,12 +1,12 @@
 "use client";
-import "@/styles/globals.css";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FaRegCircleUser } from "react-icons/fa6";
 import supabase from '@/utils/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import '@/app/styles/globals.css'
 
-export default function Login() {
+export default function Loginpage() {
    // Correctly call useRouter as a function
   const router = useRouter();
   const [Username, setUsername] = useState('');
@@ -25,7 +25,7 @@ export default function Login() {
       alert("Could not authenticate user");
     } else {
       // Authentication succeeded
-      router.push('/Dashboard'); // Redirect to another page
+      router.push('/admins'); // Redirect to another page
       setUsername('');
       setPassword('');
       
@@ -48,7 +48,6 @@ export default function Login() {
               onChange={(e) => setUsername(e.target.value)}
               required
             /> 
-            <FaRegCircleUser className="absolute top-[42%] left-[44%] size-7" />
             <br />  
             <input 
               className="txt p-3 mt-8 w-72 rounded-xl border" 
@@ -59,7 +58,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
             /> 
-            <RiLockPasswordLine className="absolute top-[53%] left-[44%] size-7" />
+        
             <br />
             <button className="text-white font-bold bg-gradient-to-r from-indigo-400 to-indigo-600 w-72 p-3 mt-10 rounded-xl hover:scale-105 duration-300" type="submit">
               L O G I N
