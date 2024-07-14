@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { FiChevronRight, FiSearch } from "react-icons/fi";
 
 const Menu = () => {
   const [isSidebarClosed, setIsSidebarClosed] = useState(true);
@@ -40,15 +39,11 @@ const Menu = () => {
           <button className={`text-white ${isDarkMode ? "bg-gray-700" : "bg-gray-300"}`} onClick={toggleDarkMode}>
             {isDarkMode ? "Light" : "Dark"} Mode
           </button>
-          <FiChevronRight
-            className={`transform ${isSidebarClosed ? "" : "rotate-180"}`}
-          />
         </header>
 
         <div className="flex flex-col justify-between h-full">
           <ul className="flex-grow">
             <li className="flex items-center bg-gray-700 rounded-lg m-2 p-2">
-              <FiSearch className="text-white" />
               {!isSidebarClosed && (
                 <input
                   type="text"

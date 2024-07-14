@@ -2,11 +2,12 @@ import React from 'react';
 import '@/app/styles/globals.css'
 import Link from 'next/link';
 export default function Teachertable() {
+
     return (
         <div className="relative w-full flex flex-col shadow-lg mb-6">
             <div className="flex items-center justify-between px-4">
-             <Link href={'./Addteacher'} className="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 mt-4  rounded text-sm absolute top-[5%] left-[90%] z-10" >
-                 Add Teacher 
+             <Link href="/admins/addteachers" className="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 mt-4  rounded text-sm absolute top-[5%] left-[90%] z-10" >
+                Add Teacher 
                 </Link>
             </div>
             <div className="flex flex-wrap items-center">
