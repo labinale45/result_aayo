@@ -7,7 +7,7 @@ export default function homesLayout({
       <section>
         {/* Include shared UI here e.g. a header or sidebar */}
         <Nav/>
-       <Menu/> {children}
+       <Menu/> {children} 
       </section>
     )
   }
