@@ -1,8 +1,10 @@
+
 "use client"
 import "tailwindcss/tailwind.css";
 import "@/app/styles/globals.css";
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+
 
 const Main = () => {
   const router = useRouter();
