@@ -3,7 +3,6 @@ import { useState } from "react";
 import supabase from "@/utils/client";
 import '@/app/styles/globals.css'
 
-
 export default function AddTeacher() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -12,36 +11,68 @@ export default function AddTeacher() {
   const [contact, setContact] = useState('');
   const [gender, setGender] = useState('');
 
+  const generateUsername = (fullName) => {
+    return fullName.toLowerCase().replace(/\s/g, '') + Math.floor(1000 + Math.random() * 9000);
+  };
+
+  const generatePassword = () => {
+    return Math.random().toString(36).slice(-8);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase
-      .from('teachers')
+  
+    const username = generateUsername(fullName);
+    const password = generatePassword();
+    const role = "teacher";
+  
+    // First, insert into users table
+    const { data: userData, error: userError } = await supabase
+      .from('users')
       .insert([
-        {
-          Fullname: fullName,
-          Email: email,
-          Address: address,
-          DOB: dob,
-          Contact: contact,
-          Gender: gender
-        }
-      ]);
-
-    if (error) {
-      console.error('Error adding teacher:', error.message);
-    } else {
-      console.log('Teacher added:', data);
-      // Reset form data or show success message
-      setFullName('');
-      setEmail('');
-      setAddress('');
-      setDob('');
-      setContact('');
-      setGender('');
-      alert.success('Teacher added successfully');
+        { username, password, email, role }
+      ])
+      .select();
+  
+    if (userError) {
+      console.error('Error adding user:', userError.message);
+      alert('Error adding user');
+      return;
+    }
+  
+    // If user insertion was successful, insert into teachers table
+    if (userData && userData[0]) {
+      const { data: teacherData, error: teacherError } = await supabase
+        .from('teachers')
+        .insert([
+          {
+            user_id: userData[0].id,
+            Fullname: fullName,
+            Email: email,
+            Address: address,
+            DOB: dob,
+            Contact: contact,
+            Gender: gender
+          }
+        ]);
+  
+      if (teacherError) {
+        console.error('Error adding teacher:', teacherError.message);
+        alert('Error adding teacher');
+      } else {
+        console.log('Teacher added:', teacherData);
+        // Reset form data or show success message
+        setFullName('');
+        setEmail('');
+        setAddress('');
+        setDob('');
+        setContact('');
+        setGender('');
+        alert('Teacher added successfully');
+      }
     }
   };
 
+  
   return (
     <div className="bg-gradient-to-r from-violet-100 to-indigo-400 min-h-screen flex items-center justify-center">
       <div className="bg-[#253553] flex rounded-3xl shadow-lg max-w-4xl p-6">
