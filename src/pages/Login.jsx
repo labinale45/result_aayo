@@ -1,6 +1,4 @@
 "use client";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { FaRegCircleUser } from "react-icons/fa6";
 import supabase from '@/utils/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

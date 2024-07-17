@@ -1,8 +1,8 @@
 "use client"
 import { useState } from "react";
 import supabase from "@/utils/client";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { FaRegCircleUser } from "react-icons/fa6";
+import '@/app/styles/globals.css'
+
 
 export default function AddTeacher() {
   const [fullName, setFullName] = useState('');
@@ -38,6 +38,7 @@ export default function AddTeacher() {
       setDob('');
       setContact('');
       setGender('');
+      alert.success('Teacher added successfully');
     }
   };
 
