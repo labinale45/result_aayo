@@ -1,26 +1,31 @@
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import supabase from '@/utils/client';
 import '@/app/styles/globals.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Teachertable() {
     const [teachers, setTeachers] = useState([]);
     const [editMode, setEditMode] = useState(false);
     const [currentTeacher, setCurrentTeacher] = useState(null);
+    const fetchCalled = useState(false);
 
     useEffect(() => {
-        fetchTeachers();
+        
+        if(!fetchCalled.current) {
+            fetchTeachers();
+            fetchCalled.current = true;
+        }
     }, []);
 
     const fetchTeachers = async () => {
         const { data, error } = await supabase
             .from('teachers')
-            .select('*');
+            .select('*, users (id, username, password)');
 
         if (error) {
             console.error('Error fetching teachers:', error);
@@ -31,17 +36,22 @@ export default function Teachertable() {
         }
     };
 
-    const deleteTeacher = async (id) => {
-        const { error } = await supabase
+    const deleteTeacher = async (teacherId, userId) => {
+        const { error: teacherError } = await supabase
             .from('teachers')
             .delete()
-            .eq('id', id);
+            .eq('user_id', teacherId);
 
-        if (error) {
-            console.error('Error deleting teacher:', error);
-            toast.error('Error deleting teacher');
+        const { error: userError } = await supabase
+            .from('users')
+            .delete()
+            .eq('id', userId);
+
+        if (teacherError || userError) {
+            console.error('Error deleting teacher or user:', teacherError || userError);
+            toast.error('Error deleting teacher or user');
         } else {
-            setTeachers(teachers.filter(teacher => teacher.id !== id));
+            setTeachers(teachers.filter(teacher => teacher.id !== teacherId));
             toast.success('Teacher deleted successfully');
         }
     };
@@ -53,22 +63,41 @@ export default function Teachertable() {
 
     const handleEditChange = (e) => {
         const { name, value } = e.target;
-        setCurrentTeacher((prevTeacher) => ({ ...prevTeacher, [name]: value }));
+        setCurrentTeacher((prevTeacher) => ({
+            ...prevTeacher,
+            [name]: value,
+            users: {
+                ...prevTeacher.users,
+                [name]: value
+            }
+        }));
     };
 
     const handleEditSubmit = async (e) => {
         e.preventDefault();
-        const { id, ...updatedData } = currentTeacher;
 
-        const { error } = await supabase
+        const { id, users, ...updatedTeacherData } = currentTeacher;
+        const updatedUserData = {
+            username: currentTeacher.users?.username,
+            password: currentTeacher.users?.password,
+        };
+
+        const { error: teacherError } = await supabase
             .from('teachers')
-            .update(updatedData)
+            .update(updatedTeacherData)
             .eq('id', id);
 
-        if (error) {
-            console.error('Error updating teacher:', error);
-            toast.error('Error updating teacher');
-        } else {
+        const { error: userError } = await supabase
+            .from('users')
+            .update(updatedUserData)
+            .eq('id', currentTeacher.users.id);
+
+        if (teacherError) {
+            console.error('Error updating teacher or user:', teacherError);
+            toast.error('Error updating teacher ');
+        }else if(userError){
+            toast.error('Error updating user');
+        }else {
             setTeachers(teachers.map(teacher => (teacher.id === id ? currentTeacher : teacher)));
             setEditMode(false);
             toast.success('Teacher updated successfully');
@@ -77,7 +106,7 @@ export default function Teachertable() {
 
     return (
         <div className="relative w-full flex flex-col shadow-lg mb-6">
-            <ToastContainer />
+            <ToastContainer/>
             <div className="flex items-center justify-between px-4">
                 <Link href="/admins/addteachers" className="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 mt-4 rounded text-sm absolute top-[5%] left-[90%] z-10">
                     Add Teacher
@@ -125,7 +154,7 @@ export default function Teachertable() {
                         </thead>
                         <tbody>
                             {teachers.map((teacher) => (
-                                <tr key={teacher.id}>
+                                <tr key={teacher.user_id}>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         {teacher.id}
                                     </td>
@@ -148,10 +177,10 @@ export default function Teachertable() {
                                         {teacher.Address}
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        {teacher.Username}
+                                        {teacher.users?.username || 'N/A'}
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        {teacher.Password}
+                                        {teacher.users?.password || 'N/A'}
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <button 
@@ -162,7 +191,7 @@ export default function Teachertable() {
                                         </button>
                                         <button 
                                             className="text-black hover:text-blue-300 ml-4"
-                                            onClick={() => deleteTeacher(teacher.id)}
+                                            onClick={() => deleteTeacher(teacher.user_id, teacher.users.id)}
                                         >
                                             Delete
                                         </button>
@@ -241,8 +270,8 @@ export default function Teachertable() {
                                 <label>Username</label>
                                 <input
                                     type="text"
-                                    name="Username"
-                                    value={currentTeacher.Username}
+                                    name="username"
+                                    value={currentTeacher.users?.username}
                                     onChange={handleEditChange}
                                     className="w-full px-3 py-2 border"
                                 />
@@ -251,8 +280,8 @@ export default function Teachertable() {
                                 <label>Password</label>
                                 <input
                                     type="text"
-                                    name="Password"
-                                    value={currentTeacher.Password}
+                                    name="password"
+                                    value={currentTeacher.users?.password}
                                     onChange={handleEditChange}
                                     className="w-full px-3 py-2 border"
                                 />
@@ -279,4 +308,3 @@ export default function Teachertable() {
         </div>
     );
 }
-
