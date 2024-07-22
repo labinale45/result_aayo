@@ -1,22 +1,11 @@
 
-"use client"
-import "tailwindcss/tailwind.css";
 import "@/app/styles/globals.css";
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-
+import Redirecting from "./redirecting";
 
 const Main = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    // Redirect to /homes when the component mounts
-    router.push('/homes');
-  }, [router]);
-
-  return (
+  return(
     <div>
-      <h1>Redirecting...</h1>
+      <Redirecting/>
     </div>
   );
 };
